@@ -1,0 +1,47 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[11pt, a4paper]{awesome-cv}
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
+
+%-------------------------------------------------------------------------------
+%	LETTER INFORMATION
+%-------------------------------------------------------------------------------
+% The company being applied to
+\recipient
+  {Company Recruitment Team}
+  {Some address}
+\letterdate{\today} % The date on the letter, default is the date of compilation
+
+\lettertitle{Job Application for Software Engineer} % The title of the letter
+\letteropening{Dear Mr./Ms./Dr. LastName,} % How the letter is opened
+\letterclosing{Sincerely,} % How the letter is closed
+\letterenclosure[Attached]{Curriculum Vitae} % Any enclosures with the letter
+
+\input{content/info}
+
+%-------------------------------------------------------------------------------
+\begin{document}
+\makecvheader[R]
+\makecvfooter{}{}{}
+\makelettertitle
+
+%-------------------------------------------------------------------------------
+%	LETTER CONTENT
+%-------------------------------------------------------------------------------
+\begin{cvletter}
+
+\lettersection{About Me}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque sit amet lectus facilisis sed luctus nisl iaculis.
+
+\lettersection{Why Google?}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque sit amet lectus facilisis sed luctus nisl iaculis.
+
+\lettersection{Why Me?}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque sit amet lectus facilisis sed luctus nisl iaculis.
+
+\end{cvletter}
+
+\makeletterclosing
+
+\end{document}

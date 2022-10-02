@@ -1,0 +1,21 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+% Configure document
+\documentclass[12pt, a4paper]{awesome-cv}
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
+
+\input{content/info}
+
+\begin{document}
+    \makecvheader[L]
+    \makecvfooter{Updated \today}{}{\thepage}
+    \input{content/summary.tex}
+    \input{content/experience.tex}
+    \input{content/education.tex}
+    \input{content/skills.tex}
+    \input{content/honors.tex}
+\end{document}
+
+% Other interesting resumes:
+% - https://kirintwn.github.io/resume/resume.pdf
