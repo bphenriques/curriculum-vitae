@@ -3,4 +3,4 @@
 
 # Curriculum Vitae
 
-Based on [posquit0/Awesome-CV](https://github.com/posquit0/Awesome-CV) template.
+Based on [posquit0/Awesome-CV](https://github.com/posquit0/Awesome-CV) template. Made some personal changes to support cloud-based tags.
