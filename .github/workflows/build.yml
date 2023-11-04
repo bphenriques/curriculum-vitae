@@ -14,7 +14,7 @@ jobs:
      
       - name: Obtains the next version
         id: fetch_tag
-        run: echo "::set-output name=tag::$(./ci/next-semver.sh --mode patch)"
+        run: echo "tag=$(./ci/next-semver.sh --mode patch)" >> $GITHUB_OUTPUT
       
       - name: Compile LaTex
         uses: dante-ev/latex-action@latest
