@@ -555,3 +555,38 @@
     \footnotesize{\foreach \n in {#1}{\skilltag{\n}}}
 }
 
+% \openSourceEntry{Title}{When}{Description}
+\newcommand*{\openSourceEntry}[3]{%
+  \vspace{-2.0mm}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \renewcommand{\arraystretch}{0.90} % Tighter
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \entrytitlestyle{#1} & \entrydatestyle{#2} \\
+    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#3}}
+  \end{tabular*}%
+  }
+  
+\newenvironment{openSourceDescription}{%
+  \vspace{-4.0mm}
+  \begin{justify}
+}{%
+  \end{justify}
+  \vspace{-4.0mm}
+}
+
+\newenvironment{openSourceItems}{%
+  \vspace{-4.0mm}
+  \begin{justify}
+  \begin{itemize}[leftmargin=2ex, nosep, noitemsep]
+    \setlength{\parskip}{0pt}
+    \renewcommand{\labelitemi}{\bullet}
+}{%
+  \end{itemize}
+  \end{justify}
+  \vspace{-4.0mm}
+}
+
+\newcommand{\subItem}[1]{
+    {\setlength\itemindent{10pt} \item[\bullet]#1}
+}
