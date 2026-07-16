@@ -17,10 +17,10 @@ jobs:
         run: echo "tag=$(./ci/next-semver.sh --mode patch)" >> $GITHUB_OUTPUT
       
       - name: Compile LaTex
-        uses: dante-ev/latex-action@latest
+        uses: xu-cheng/latex-action@v3
         with:
           root_file: cv.tex
-          args: -xelatex -latexoption=-file-line-error -latexoption=-interaction=nonstopmode
+          latexmk_use_xelatex: true
 
       - name: Release
         id: create_release
