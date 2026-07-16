@@ -2,14 +2,29 @@
 
 \begin{cventries}
   \openSourceEntry
+    {\href{https://github.com/bphenriques/selfhost-nix}{bphenriques/selfhost-nix}}
+    {January 2025 - Present}
+    {
+    \begin{openSourceItems}
+        \item \textbf{Reusable NixOS framework} for self-hosting on an interface/implementation (provider-swappable) architecture --- one service declaration wires ingress + TLS, SSO/OIDC, metrics, backups, and notifications.
+        \item \textbf{Security-first:} secrets generated outside the Nix store with rotation, auto-provisioned per-service OIDC clients, and hardened systemd units.
+        \item \textbf{Shipped as a real project:} NixOS VM integration tests in CI, an mdBook docs site, and a \texttt{nix flake init} consumer template.
+    \end{openSourceItems}
+    \vspace{4mm}
+    \skilltaglist{\textbf{Nix},\textbf{NixOS},\textbf{OIDC/SSO},Traefik,Prometheus,systemd,WireGuard,sops-nix,Shell Scripting}
+    }
+
+  \vspace{2mm}
+
+  \openSourceEntry
     {\href{https://github.com/bphenriques/dotfiles}{bphenriques/dotfiles}}
     {April 2020 - Present}
     {
     \begin{openSourceDescription}
-    Declarative NixOS and macOS systems using Nix Flakes. Includes a self-hosted homelab platform where a single service declaration drives routing, authentication, secrets, backups, and monitoring.
+    Declarative NixOS/macOS fleet using Nix Flakes and the production consumer of \href{https://github.com/bphenriques/selfhost-nix}{selfhost-nix} --- 4 hosts, 20+ services, one-command bare-metal rebuilds, microVM isolation, and encrypted off-site backups.
     \end{openSourceDescription}
     \vspace{4mm}
-    \skilltaglist{\textbf{Nix},\textbf{NixOS},Nix-Darwin,Home-Manager,Traefik,WireGuard,Cloudflare,Prometheus,systemd,Shell Scripting}
+    \skilltaglist{\textbf{NixOS},Nix-Darwin,Home-Manager,Cloudflare}
     }
 
   \vspace{2mm}
@@ -19,13 +34,8 @@
     {October 2023 - November 2023}
     {   
     \begin{openSourceDescription}
-    Proof-of-concept on how to bridge \href{https://github.com/http4s/http4s}{http4s} with \href{https://github.com/slackapi/java-slack-sdk}{Slack's Java SDK} to build interactive Slack applications:
+    Proof-of-concept bridging \href{https://github.com/http4s/http4s}{http4s} with \href{https://github.com/slackapi/java-slack-sdk}{Slack's Java SDK}: middleware to authenticate and bridge requests/responses, and a functional API over interaction state.
     \end{openSourceDescription}
-    \vspace{8mm}
-    \begin{openSourceItems}
-        \item Http4s middleware that uses Slack's SDK to authenticate requests and bridge requests/responses.
-        \item Functional API to retrieve and parse the state of interactions.
-    \end{openSourceItems}
     \vspace{4mm}
     \skilltaglist{Slack API,\textbf{Cats},\textbf{Cats Effect},Http4s}
     }
@@ -41,7 +51,7 @@
         \item Tag-based navigation, backlinks, and navigation graph using information extracted from \href{https://www.orgroam.com/}{org-roam}.
     \end{openSourceItems}
     \vspace{4mm}
-    \skilltaglist{Knowledge Base,Digital Garden,Emacs,\href{https://www.orgroam.com/}{org-roam},\href{https://orgmode.org/}{org-mode},\href{https://gohugo.io/}{Hugo},\href{https://ox-hugo.scripter.co/}{ox-hugo},Javascript,HTML,SCSS,Github Actions, Nix}
+    \skilltaglist{Emacs,\href{https://www.orgroam.com/}{org-roam},\href{https://orgmode.org/}{org-mode},\href{https://gohugo.io/}{Hugo},Javascript,SCSS,Github Actions,Nix}
     }
 
   \vspace{2mm}

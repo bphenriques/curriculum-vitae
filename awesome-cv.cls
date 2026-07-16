@@ -44,6 +44,7 @@
 %-------------------------------------------------------------------------------
 
 \RequirePackage{array}      % Needed to make fixed length table
+\RequirePackage{tabularx}   % Extended tabular environment
 \RequirePackage{enumitem}   % Needed to handle list environment
 \RequirePackage{ragged2e}   % Needed to handle text alignment
 \RequirePackage{geometry}   % Needed to configure page layout
@@ -51,17 +52,37 @@
 \RequirePackage{xcolor}     % Needed to manage colors
 \RequirePackage{ifxetex}    % Needed to use \ifxetex-\else-\fi statement
 \RequirePackage{xifthen}    % Needed to use \if-\then-\else statement
+\RequirePackage{xstring}    % Needed to test/manipulate strings
 \RequirePackage{etoolbox}   % Needed to use a toolbox of programming tools
 \RequirePackage{setspace}   % Needed to change line spacing in specific environment
 \RequirePackage[quiet]{fontspec}    % Needed to manage fonts
 \defaultfontfeatures{Ligatures=TeX} % To support LaTeX quoting style
 \RequirePackage{unicode-math}       % Needed to manage math fonts
-\RequirePackage{fontawesome5}        % Needed to use icons from font-awesome (https://github.com/posquit0/latex-fontawesome)
-\RequirePackage{roboto}
-\RequirePackage[default,opentype]{sourcesanspro}
+\RequirePackage{fontawesome6}       % Needed to use icons from font-awesome
+\RequirePackage{accsupp}            % Needed for accessibility support
+\defaultfontfeatures{Renderer=HarfBuzz}
+\setmainfont{Source Sans 3}[
+  UprightFont=*, ItalicFont=* Italic, BoldFont=* Bold,
+  BoldItalicFont=* Bold Italic,
+  FontFace={l}{n}{Font=* Light},
+  FontFace={l}{it}{Font=* Light Italic},
+]
+\setsansfont{Source Sans 3}[
+  UprightFont=*, ItalicFont=* Italic, BoldFont=* Bold,
+  BoldItalicFont=* Bold Italic,
+  FontFace={l}{n}{Font=* Light},
+  FontFace={l}{it}{Font=* Light Italic},
+]
+\newfontfamily\roboto{Roboto}[
+  UprightFont=*, ItalicFont=* Italic, BoldFont=* Bold,
+  BoldItalicFont=* Bold Italic,
+  FontFace={l}{n}{Font=* Light},
+  FontFace={l}{it}{Font=* Light Italic},
+]
 \RequirePackage[skins]{tcolorbox}   % Needed for the photo ID
 \RequirePackage{parskip}            % Needed to deal a paragraphs
 \RequirePackage[hidelinks,unicode,pdfpagelabels=false]{hyperref}    % Needed to deal hyperlink
+\RequirePackage{bookmark}           % Needed for PDF bookmarks
 \hypersetup{%
   pdftitle={},
   pdfauthor={},
@@ -108,6 +129,7 @@
 \colorlet{text}{darkgray}
 \colorlet{graytext}{gray}
 \colorlet{lighttext}{lightgray}
+\colorlet{sectiondivider}{gray}
 % Awesome colors
 \definecolor{awesome-emerald}{HTML}{00A388}
 \definecolor{awesome-skyblue}{HTML}{0395DE}
@@ -132,12 +154,12 @@
 %-------------------------------------------------------------------------------
 %                Configuration for fonts
 %-------------------------------------------------------------------------------
-\newcommand*{\headerfont}{\roboto}
-\newcommand*{\headerfontlight}{\robotothin}
+\newcommand*{\headerfont}{\roboto\selectfont}
+\newcommand*{\headerfontlight}{\roboto\fontseries{l}\selectfont}
 
-\newcommand*{\footerfont}{\sourcesanspro}
-\newcommand*{\bodyfont}{\sourcesanspro}
-\newcommand*{\bodyfontlight}{\sourcesansprolight}
+\newcommand*{\footerfont}{\sffamily}
+\newcommand*{\bodyfont}{\sffamily}
+\newcommand*{\bodyfontlight}{\sffamily\fontseries{l}\selectfont}
 
 %-------------------------------------------------------------------------------
 %                Configuration for styles
@@ -221,11 +243,11 @@
 % Usage: \name{<firstname>}{<lastname>}
 \newcommand*{\name}[2]{\def\@firstname{#1}\def\@lastname{#2}}
 
-\newcommand*{\location}[1]{\socialLinksAdd{\faMapMarker*\acvHeaderIconSep#1}}
+\newcommand*{\location}[1]{\socialLinksAdd{\faLocationDot\acvHeaderIconSep#1}}
 
 % Defines writer's mobile (optional)
 % Usage: \mobile{<mobile number>}
-\newcommand*{\mobile}[1]{\socialLinksAdd{\faMobile*\acvHeaderIconSep#1}}
+\newcommand*{\mobile}[1]{\socialLinksAdd{\faMobileScreen\acvHeaderIconSep#1}}
 
 % Defines writer's email (optional)
 % Usage: \email{<email address>}
@@ -233,7 +255,7 @@
 
 % Defines writer's homepage (optional)
 % Usage: \homepage{<url>}{<display-name>}
-\newcommand{\homepage}[2]{\headerSocial{\faHome}{#1}{#2}}
+\newcommand{\homepage}[2]{\headerSocial{\faHouse}{#1}{#2}}
 
 % Defines writer's github (optional)
 % Usage: \github{<github-nick>}
@@ -352,7 +374,7 @@
   \vspace{\acvSectionTopSkip}
   \sectionstyle{#1}
   \phantomsection
-  \color{gray}\vhrulefill{0.9pt}
+  \color{sectiondivider}\vhrulefill{0.9pt}
 }
 
 % Define a subsection for CV
@@ -392,7 +414,7 @@
       {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
       {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
       \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}
+    \ifstrempty{#5}{}{\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}}
   \end{tabular*}%
 }
 
@@ -504,8 +526,9 @@
   \par\addvspace{2.5ex}
   \phantomsection{}
   \lettersectionstyle{#1}
-  \color{gray}\vhrulefill{0.9pt}
+  \color{sectiondivider}\vhrulefill{0.9pt}
   \par\nobreak\addvspace{0.4ex}
+  \lettertextstyle
 }
 
 % Define a title of the cover letter
@@ -589,4 +612,27 @@
 
 \newcommand{\subItem}[1]{
     {\setlength\itemindent{10pt} \item[\bullet]#1}
+}
+
+% \cventryHeader{company}{location}{date-range}
+\newcommand*{\cventryHeader}[3]{%
+  \vspace{-1.0mm}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \entrytitlestyle{#1} & \entrylocationstyle{#2} \\
+    & \entrydatestyle{#3} \\
+  \end{tabular*}%
+}
+
+% \cventryRole{position}{date}{description}
+\newcommand*{\cventryRole}[3]{%
+  \vspace{-2.0mm}
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \renewcommand{\arraystretch}{0.90}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
+    \entrypositionstyle{#1} & \entrydatestyle{#2} \\
+    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#3}}
+  \end{tabular*}%
 }

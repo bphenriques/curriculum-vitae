@@ -2,44 +2,36 @@
 
 \begin{cventries}
   \vspace{-2mm}
-  \cventry
-    {Technical Lead, API Platform}
-    {\href{https://www.kaluza.com/}{Kaluza}}
-    {Lisbon, Portugal (Full Remote)}
-    {September 2024 - Present}
-    {
-      \begin{cvitems}
-        \item \textbf{Leading the technical direction} of Kaluza's GraphQL and Event Streaming API, authoring technical designs and aligning with engineering stakeholders on cost reduction and scalability.
-        \item \textbf{Reduced new market spinnability effort from \textasciitilde{}2 weeks to days}, enabling the team to expand across 3+ markets in the short-term.
-        \item \textbf{Improved internal developer experience} by enabling local server execution and automating API registration onto the documentation site through cross-team collaboration.
-      \end{cvitems}
-      \vspace{4mm}
-      \skilltaglist{\textbf{Scala},\textbf{Typelevel},GraphQL,\textbf{Event Stream Processing},\textbf{Kafka},\textbf{AWS},Terraform,Kubernetes}
-    }
-
-  \cventry
-    {Backend Software Engineer}
-    {\href{https://www.kaluza.com/}{Kaluza}}
-    {Lisbon, Portugal (Full Remote)}
-    {June 2021 - September 2024}
-    {
-      \begin{cvitems}
-        %\item \textbf{Research} \href{https://raw.githubusercontent.com/bphenriques/curriculum-vitae/master/content/mockup_kaluza_research.png}{self-serviceable access requests UX options} so that domain owners can track and manage permissions in Kaluza Data Mart.
-        \item \textbf{Led the design and development} of an access request API that reduced frequent support requests from \textbf{5 minutes to 30 seconds}.
-        \item \textbf{Mentor and took the lead on upskilling team members} in functional Scala, fostering collaboration and shortening knowledge gaps.
-        %\item \textbf{Designed and built} a BigQuery library that bridges the Java SDK with the Typelevel stack to promote reusability and reliability. 
-        \item \textbf{Designed, built, and launched a Kafka to BigQuery data ingestion pipeline} powering Kaluza Data Mart (\textbf{15k events per second}).
-        %\item Developed example Scala projects and automated Scala Steward onboarding as part of the \textbf{Scala caretaker community}.
-        \item \textbf{Co-led with success} a cross-team initiative to ease standardization of Kaluza's external interfaces (GraphQL, Events, and Analytics).
-        %\item Designed and built a GDPR Right To Erasure tool to manage PII information in BigQuery.
-        \item \textbf{Reduced data store costs by 98\% and Kafka ingestion time by 93\%} by migrating from PostgreSQL to DynamoDB.  % Daily Costs: ~7$* to around ~0.12$
-        \item \textbf{Participated in on-call rotation} supporting Kaluza's GraphQL and Event Streaming services.
-      \end{cvitems}
-      \vspace{4mm}
-      \skilltaglist{\textbf{Scala},\textbf{Typelevel},GraphQL,\textbf{Event Stream Processing},\textbf{Kafka},\textbf{AWS},GCP,Terraform,BigQuery,PostgreSQL,DynamoDB,Kubernetes}
-    }
-    % Other notes: Reduced Costs from 7$ a day to 0.12$ a day by moving from RDS to dynamo
-    % Re-ingestion of topics from 2 weeks to ~30 minutes
+  \cventryHeader{\href{https://www.kaluza.com/}{Kaluza}}{Lisbon, Portugal (Full Remote)}{Jun 2021 – Present}
+  \cventryRole{Technical Lead, API Platform}{Sep 2024 – Present}{
+    \begin{cvitems}
+      \item \textbf{Set technical direction for the external API platform}, authoring the architectural designs behind its SLA framework and data-ownership model and driving them across teams to production.
+      \item \textbf{Lead the design, scaling, and lifecycle} of Kaluza's synchronous and asynchronous API gateways (GraphQL and Event Streaming), operating at up to \textbf{1k req/s}.
+      \item \textbf{Designed and shipped a global-first API schema standard} that isolates market/client extensions, adopted across all domain teams registering into the platform.
+      \item \textbf{Reduced new-market spin-up from \textasciitilde{}2 weeks to days}, enabling expansion across 3+ markets.
+      \item \textbf{Cut Datadog logging costs by \textasciitilde{}\$20k/month} by replacing verbose per-step logs with a single outcome event per resolver, keeping per-request logging cost flat as the API grows.
+      %\item \textbf{Sped up the local development cycle and automated API registration} into the documentation site, cutting manual cross-team setup.
+    \end{cvitems}
+    \vspace{4mm}
+    \skilltaglist{\textbf{Scala},\textbf{Typelevel},GraphQL,\textbf{Event Stream Processing},\textbf{Kafka},\textbf{AWS},Terraform,Kubernetes,Databricks}
+  }
+  \cventryRole{Backend Software Engineer, Data Platform}{Jun 2021 – Sep 2024}{
+    \begin{cvitems}
+      %\item \textbf{Research} \href{https://raw.githubusercontent.com/bphenriques/curriculum-vitae/master/content/mockup_kaluza_research.png}{self-serviceable access requests UX options} so that domain owners can track and manage permissions in Kaluza Data Mart.
+      \item \textbf{Led the design} of an access request API, cutting support requests from \textbf{5 minutes to 30 seconds}.
+      \item \textbf{Mentored and led upskilling of team members} in functional Scala.
+      %\item \textbf{Designed and built} a BigQuery library that bridges the Java SDK with the Typelevel stack to promote reusability and reliability.
+      \item \textbf{Designed, built, and launched a Kafka to BigQuery ingestion pipeline} for Kaluza Data Mart (\textbf{15k events/sec}).
+      %\item Developed example Scala projects and automated Scala Steward onboarding as part of the \textbf{Scala caretaker community}.
+      \item \textbf{Co-led} a cross-team initiative to unify Kaluza's external interfaces (GraphQL, Events, Analytics) behind common tooling, independent of their implementation.
+      %\item Designed and built a GDPR Right To Erasure tool to manage PII information in BigQuery.
+      \item \textbf{Reduced data store costs by 98\% and Kafka ingestion time by 93\%} by migrating from PostgreSQL to DynamoDB.  % Daily Costs: ~7$* to around ~0.12$
+    \end{cvitems}
+    \vspace{4mm}
+    \skilltaglist{\textbf{Scala},\textbf{Typelevel},GraphQL,\textbf{Event Stream Processing},\textbf{Kafka},\textbf{AWS},GCP,Terraform,BigQuery,PostgreSQL,DynamoDB,Kubernetes}
+  }
+  % Other notes: Reduced Costs from 7$ a day to 0.12$ a day by moving from RDS to dynamo
+  % Re-ingestion of topics from 2 weeks to ~30 minutes
 
 %  \vspace{0.25mm}
 
@@ -52,8 +44,8 @@
       \begin{cvitems}
         % https://talkdesk.com/cloud-contact-center/customer-engagement/outbound-dialer/
         \item \textbf{Designed, built, and launched} Outbound Dialer (\textbf{60k phone calls per day}).
-        \item \textbf{Doubled the number of calls} launched by the Dialer Engine by optimizing the I/O operations in the critical path.
-        \item \textbf{Designed and built a Phone Calls Automation Framework} to simulate real-world phone interactions and automate E2E tests.
+        \item \textbf{Doubled the Dialer Engine's call throughput} by optimizing I/O in the critical path.
+        \item \textbf{Built a Phone Call Automation Framework} to simulate real-world interactions and automate E2E tests.
         % \item \textbf{Halved deployment time} and improved its safety by automating the process and promoting explicit rollback procedures.
         %\item \textbf{Mentored and took the lead on upskilling team members} by conducting Spring Boot workshops.
       \end{cvitems}
