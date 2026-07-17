@@ -9,10 +9,10 @@
     {Sep 2024 – Present}
     {
     \begin{cvitems}
-      \item Set technical direction for the external API platform (30+ teams, 400+ resolvers): GraphQL SLAs and governance.
+      \item Designed KaPI's SLA model: complexity-scored latency tiers baselined on production data, with 400+ resolvers owned by their domain teams.
       \item Own both API gateways: GraphQL (scaled to \textbf{1k req/s} for the largest client) and Event Streaming (operations).
       \item Designed and shipped a global-first schema model isolating local extensions across UK, France, and Australia.
-      \item Reduced new-environment spin-up from \textbf{\textasciitilde{}2 weeks to days}, shortening time-to-first-use for new clients.
+      \item Reduced new-environment spin-up from \textbf{\textasciitilde{}2 weeks to 3 days}, shortening time-to-first-use for new clients.
       \item Cut Datadog logging costs by \textbf{\textasciitilde{}\$20k/month} by making verbose logs outcome-driven and their cost flat as traffic grows.
       %\item Sped up the local development cycle and automated API registration into the documentation site, cutting manual cross-team setup.
     \end{cvitems}
@@ -34,7 +34,7 @@
       %\item Developed example Scala projects and automated Scala Steward onboarding as part of the Scala caretaker community.
       \item Co-led a cross-team initiative to standardize external interfaces registration and governance (GraphQL, Events, Analytics).
       %\item Designed and built a GDPR Right To Erasure tool to manage PII information in BigQuery.
-      \item Reduced data store costs by \textbf{98\%} and Kafka ingestion time by \textbf{93\%} by migrating from PostgreSQL to DynamoDB.  % Daily Costs: ~7$* to around ~0.12$
+      \item Chose DynamoDB over PostgreSQL for the access pattern, cutting re-ingestion from \textbf{2 weeks to 30 minutes}.  % Daily Costs: ~7$* to around ~0.12$
     \end{cvitems}
     \vspace{4mm}
     \skilltaglist{Scala,Typelevel,Event Stream Processing,Kafka,AWS,GCP,Terraform,BigQuery,PostgreSQL,DynamoDB,Kubernetes}
