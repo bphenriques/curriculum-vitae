@@ -6,9 +6,9 @@
     {January 2025 - Present}
     {
     \begin{openSourceItems}
-        \item \textbf{Reusable NixOS framework} for self-hosting on an interface/implementation (provider-swappable) architecture --- one service declaration wires ingress + TLS, SSO/OIDC, metrics, backups, and notifications.
-        \item \textbf{Security-first:} secrets generated outside the Nix store with rotation, auto-provisioned per-service OIDC clients, and hardened systemd units.
-        \item \textbf{Shipped as a real project:} NixOS VM integration tests in CI, an mdBook docs site, and a \texttt{nix flake init} consumer template.
+        \item \textbf{Reusable NixOS framework} that removes the repetitive setup behind self-hosting: one declaration wires reverse proxy, single sign-on, monitoring, backups, and notifications --- with swappable implementations.
+        \item \textbf{Security-first:} secrets kept out of the Nix store with rotation, auto-provisioned per-service SSO, and hardened service units.
+        \item \textbf{Shipped as a real project:} VM integration tests in CI, a documentation site, and a starter template.
     \end{openSourceItems}
     \vspace{4mm}
     \skilltaglist{\textbf{Nix},\textbf{NixOS},\textbf{OIDC/SSO},Traefik,Prometheus,systemd,WireGuard,sops-nix,Shell Scripting}
@@ -20,25 +20,26 @@
     {\href{https://github.com/bphenriques/dotfiles}{bphenriques/dotfiles}}
     {April 2020 - Present}
     {
-    \begin{openSourceDescription}
-    Declarative NixOS/macOS fleet using Nix Flakes and an example consumer of \href{https://github.com/bphenriques/selfhost-nix}{selfhost-nix}. Spans 4 hosts, 20+ services, one-command bare-metal rebuilds, and encrypted off-site backups; a public-facing service is network-isolated in a microVM, verified by an automated containment test.
-    \end{openSourceDescription}
+    \begin{openSourceItems}
+        \item \textbf{Declarative NixOS/macOS fleet} (4 hosts, 20+ services) and an example consumer of \href{https://github.com/bphenriques/selfhost-nix}{selfhost-nix}, with one-command bare-metal rebuilds and encrypted off-site backups.
+        \item \textbf{Sealed a public file-sharing service} in a microVM that reaches the internet but not the local network or its host, verified by an automated test.
+    \end{openSourceItems}
     \vspace{4mm}
     \skilltaglist{\textbf{NixOS},Nix-Darwin,Home-Manager,\textbf{microVM},Cloudflare}
     }
 
-  \vspace{2mm}
-
-\openSourceEntry
-    {\href{https://github.com/bphenriques/scala-example-slack-bot}{bphenriques/scala-example-slack-bot}}
-    {October 2023 - November 2023}
-    {   
-    \begin{openSourceDescription}
-    Proof-of-concept bridging \href{https://github.com/http4s/http4s}{http4s} with \href{https://github.com/slackapi/java-slack-sdk}{Slack's Java SDK}: middleware to authenticate and bridge requests/responses, and a functional API over interaction state.
-    \end{openSourceDescription}
-    \vspace{4mm}
-    \skilltaglist{Slack API,\textbf{Cats},\textbf{Cats Effect},Http4s}
-    }
+%  \vspace{2mm}
+%
+%\openSourceEntry
+%    {\href{https://github.com/bphenriques/scala-example-slack-bot}{bphenriques/scala-example-slack-bot}}
+%    {October 2023 - November 2023}
+%    {
+%    \begin{openSourceDescription}
+%    Proof-of-concept bridging \href{https://github.com/http4s/http4s}{http4s} with \href{https://github.com/slackapi/java-slack-sdk}{Slack's Java SDK}: middleware to authenticate and bridge requests/responses, and a functional API over interaction state.
+%    \end{openSourceDescription}
+%    \vspace{4mm}
+%    \skilltaglist{Slack API,\textbf{Cats},\textbf{Cats Effect},Http4s}
+%    }
 
   \vspace{2mm}
 
@@ -47,8 +48,8 @@
     {May 2020 - July 2023}
     {    
     \begin{openSourceItems}
-        \item Public Zettelkasten-based notes using \href{https://ox-hugo.scripter.co/}{ox-hugo}.
-        \item Tag-based navigation, backlinks, and navigation graph using information extracted from \href{https://www.orgroam.com/}{org-roam}.
+        \item Public interlinked notes (digital garden) published with \href{https://gohugo.io/}{Hugo} from Emacs org-mode.
+        \item Tag-based navigation, backlinks, and a graph view built from the notes.
     \end{openSourceItems}
     \vspace{4mm}
     \skilltaglist{Emacs,\href{https://www.orgroam.com/}{org-roam},\href{https://orgmode.org/}{org-mode},\href{https://gohugo.io/}{Hugo},Javascript,SCSS,Github Actions,Nix}

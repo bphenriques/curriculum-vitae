@@ -7,39 +7,38 @@ on:
 jobs:
   build-pdf:
     runs-on: ubuntu-latest
-
+    # Match upstream Awesome-CV: build inside the official TeX Live image and
+    # install the fonts the class loads by name (Source Sans 3 + Roboto).
+    container: texlive/texlive:latest
+    permissions:
+      contents: write  # needed to create the release + tag
     steps:
       - name: Set up Git repository
-        uses: actions/checkout@v1
-     
-      - name: Obtains the next version
-        id: fetch_tag
-        run: echo "tag=$(./ci/next-semver.sh --mode patch)" >> $GITHUB_OUTPUT
-      
-      - name: Compile LaTex
-        uses: xu-cheng/latex-action@v3
+        uses: actions/checkout@v4
         with:
-          root_file: cv.tex
-          latexmk_use_xelatex: true
+          fetch-depth: 0  # fetch tags so ci/next-semver.sh can find the latest
+
+      - name: Install fonts
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends fonts-roboto fonts-adobe-sourcesans3 git
+          fc-cache -f
+
+      - name: Mark workspace as safe for git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Compile LaTeX
+        run: latexmk -xelatex -file-line-error -halt-on-error -interaction=nonstopmode cv.tex
+
+      - name: Obtain the next version
+        id: fetch_tag
+        run: echo "tag=$(./ci/next-semver.sh --mode patch)" >> "$GITHUB_OUTPUT"
 
       - name: Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Provided by Actions.
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.fetch_tag.outputs.tag }}
-          release_name: Release ${{ steps.fetch_tag.outputs.tag }}
-          draft: false
-          prerelease: false
-
-      - name: Upload PDF to release
-        uses: actions/upload-release-asset@v1
+          name: Release ${{ steps.fetch_tag.outputs.tag }}
+          files: cv.pdf
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Provided by Actions.
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./cv.pdf
-          asset_name: bruno-henriques-cv.pdf
-          asset_content_type: pdf
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
