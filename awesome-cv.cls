@@ -644,8 +644,8 @@
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \entrytitlestyle{#1} & \entrylocationstyle{#2} \\
-    & \entrydatestyle{#3} \\
+    \entrytitlestyle{#1} & \entrydatestyle{#3} \\
+    \entrylocationstyle{#2} & \\
   \end{tabular*}%
 }
 
