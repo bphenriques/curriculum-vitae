@@ -6,9 +6,10 @@
     {January 2025 - Present}
     {
     \begin{openSourceItems}
-        \item Reusable NixOS framework that removes the repetitive setup behind self-hosting: one declaration wires reverse proxy, single sign-on, monitoring, backups, and notifications --- with swappable implementations.
-        \item Security-first: secrets kept out of the Nix store with rotation, auto-provisioned per-service SSO, and hardened service units.
-        \item Shipped as a real project: VM integration tests in CI, a documentation site, and a starter template.
+        \item NixOS framework that handles the cross-cutting concerns of self-hosting: a single declaration drives reverse proxy, SSO, monitoring, backups, and notifications.
+        \item Security-first: hardened services, automatic secret generation and rotation, and high-risk concerns deliberately kept out of scope rather than half-solved.
+        \item Curated yet flexible: interface-driven, so implementations swap cleanly behind batteries-included defaults.
+        \item To be promoted as my first real open-source project: VM integration tests in CI, a documentation site, and a starter template.
     \end{openSourceItems}
     \vspace{4mm}
     \skilltaglist{Nix,NixOS,OIDC/SSO,Traefik,Prometheus,systemd,WireGuard,sops-nix,Shell Scripting}
@@ -21,8 +22,9 @@
     {April 2020 - Present}
     {
     \begin{openSourceItems}
-        \item Declarative NixOS/macOS fleet (4 hosts, 20+ services) and an example consumer of \href{https://github.com/bphenriques/selfhost-nix}{selfhost-nix}, with one-command bare-metal rebuilds and encrypted off-site backups.
-        \item Sealed a public file-sharing service in a microVM that reaches the internet but not the local network or its host, verified by an automated test.
+        \item Declarative NixOS/macOS fleet spanning 4 hosts, 20+ services.
+        \item Automated encrypted backups to an off-site location.
+        \item Public file-sharing service sealed in a microVM that is allowed to reach the internet but not its host nor the local network.
     \end{openSourceItems}
     \vspace{4mm}
     \skilltaglist{NixOS,Nix-Darwin,Home-Manager,microVM,Cloudflare}
@@ -48,8 +50,8 @@
     {May 2020 - July 2023}
     {    
     \begin{openSourceItems}
-        \item Public interlinked notes (digital garden) published with \href{https://gohugo.io/}{Hugo} from Emacs org-mode.
-        \item Tag-based navigation, backlinks, and a graph view built from the notes.
+        \item Personal knowledge-base (digital garden) published with \href{https://gohugo.io/}{Hugo} from Emacs org-mode.
+        \item Custom theme supporting: tag-based navigation, backlinks, and a graph view built from the notes.
     \end{openSourceItems}
     \vspace{4mm}
     \skilltaglist{Emacs,\href{https://www.orgroam.com/}{org-roam},\href{https://orgmode.org/}{org-mode},\href{https://gohugo.io/}{Hugo},Javascript,SCSS,Nix}

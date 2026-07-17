@@ -9,11 +9,11 @@
     {Sep 2024 – Present}
     {
     \begin{cvitems}
-      \item Set technical direction for the external API platform, authoring the architectural designs behind its SLA framework and data-ownership model and driving them across teams to production.
+      \item Set technical direction for the external API platform across domains --- GraphQL SLA framework and API governance --- driving them to production.
       \item Lead the design, scaling, and lifecycle of Kaluza's synchronous and asynchronous API gateways (GraphQL and Event Streaming), operating at up to \textbf{1k req/s}.
-      \item Designed and shipped a global-first API schema standard that isolates market/client extensions, adopted across all domain teams registering into the platform.
-      \item Reduced new-market spin-up from \textbf{\textasciitilde{}2 weeks to days}, enabling expansion across 3+ markets.
-      \item Cut Datadog logging costs by \textbf{\textasciitilde{}\$20k/month} by replacing verbose per-step logs with a single outcome event per resolver, keeping per-request logging cost flat as the API grows.
+      \item Designed and shipped a global-first GraphQL schema registration model to isolate market/client extensions.
+      \item Reduced new-environment spin-up from \textbf{\textasciitilde{}2 weeks to days}, shortening time-to-first-use for new clients.
+      \item Cut Datadog logging costs by \textbf{\textasciitilde{}\$20k/month} by optimizing verbose logs to be more outcome-driven, keeping per-request logging cost flat.
       %\item Sped up the local development cycle and automated API registration into the documentation site, cutting manual cross-team setup.
     \end{cvitems}
     \vspace{4mm}
@@ -32,12 +32,12 @@
       %\item Designed and built a BigQuery library that bridges the Java SDK with the Typelevel stack to promote reusability and reliability.
       \item Designed, built, and launched a Kafka to BigQuery ingestion pipeline for Kaluza Data Mart (\textbf{15k events/sec}).
       %\item Developed example Scala projects and automated Scala Steward onboarding as part of the Scala caretaker community.
-      \item Co-led a cross-team initiative to unify Kaluza's external interfaces (GraphQL, Events, Analytics) behind common tooling, independent of their implementation.
+      \item Co-led a cross-team initiative to standardize how external interfaces (GraphQL, Events, Analytics) are registered, behind a shared governance model and tooling.
       %\item Designed and built a GDPR Right To Erasure tool to manage PII information in BigQuery.
       \item Reduced data store costs by \textbf{98\%} and Kafka ingestion time by \textbf{93\%} by migrating from PostgreSQL to DynamoDB.  % Daily Costs: ~7$* to around ~0.12$
     \end{cvitems}
     \vspace{4mm}
-    \skilltaglist{Scala,Typelevel,GraphQL,Event Stream Processing,Kafka,AWS,GCP,Terraform,BigQuery,PostgreSQL,DynamoDB,Kubernetes}
+    \skilltaglist{Scala,Typelevel,Event Stream Processing,Kafka,AWS,GCP,Terraform,BigQuery,PostgreSQL,DynamoDB,Kubernetes}
   }
   % Other notes: Reduced Costs from 7$ a day to 0.12$ a day by moving from RDS to dynamo
   % Re-ingestion of topics from 2 weeks to ~30 minutes
