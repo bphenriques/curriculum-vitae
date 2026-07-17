@@ -638,25 +638,6 @@
     {\setlength\itemindent{10pt} \item[\bullet]#1}
 }
 
-% \cventryHeader{company}{location}{date-range}
-\newcommand*{\cventryHeader}[3]{%
-  \vspace{-1.0mm}
-  \setlength\tabcolsep{0pt}
-  \setlength{\extrarowheight}{0pt}
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \entrytitlestyle{#1} & \entrydatestyle{#3} \\
-    \entrylocationstyle{#2} & \\
-  \end{tabular*}%
-}
-
-% \cventryRole{position}{date}{description}
-\newcommand*{\cventryRole}[3]{%
-  \vspace{-2.0mm}
-  \setlength\tabcolsep{0pt}
-  \setlength{\extrarowheight}{0pt}
-  \renewcommand{\arraystretch}{0.90}
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \entrypositionstyle{#1} & \entrydatestyle{#2} \\
-    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#3}}
-  \end{tabular*}%
-}
+% Multiple roles under one company: use standard \cventry for the first role
+% (company + location shown), then \cventry{role}{}{}{date}{...} with empty
+% company/location for each subsequent role (renders role + date only).
