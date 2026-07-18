@@ -283,11 +283,11 @@
 
 % Defines writer's github (optional)
 % Usage: \github{<github-nick>}
-\newcommand*{\github}[1]{\headerSocial{\faGithub}{https://github.com/#1}{#1}}
+\newcommand*{\github}[1]{\headerSocial{\faGithub}{https://github.com/#1}{GitHub: #1}}
 
 % Defines writer's linked-in (optional)
 % Usage: \linkedin{<linked-in-nick>}
-\newcommand*{\linkedin}[1]{\headerSocial{\faLinkedin}{https://www.linkedin.com/in/#1}{#1}}
+\newcommand*{\linkedin}[1]{\headerSocial{\faLinkedin}{https://www.linkedin.com/in/#1}{LinkedIn: /in/#1}}
 
 % Defines recipient's information (cover letter only)
 % Usage: \recipient{<recipient name>}{<recipient address>}
