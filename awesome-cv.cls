@@ -61,41 +61,73 @@
 \RequirePackage{fontawesome6}       % Needed to use icons from font-awesome
 \RequirePackage{accsupp}            % Needed for accessibility support
 \defaultfontfeatures{Renderer=HarfBuzz}
-% Support both "Source Sans 3" (variable or static, from Adobe/Homebrew/distro
-% packages) and "Source Sans Pro" (static, bundled with TeX Live). See
-% posquit0/Awesome-CV#624.
-\IfFontExistsTF{Source Sans 3}{%
-  \setmainfont{Source Sans 3}[
-    RawFeature={+axis={wght=350}},
-    BoldFont={Source Sans 3},
+% Prefer the vendored VARIABLE font (fonts/SourceSans3VF-*.otf) so the wght axis
+% is actually honoured and the body weight is tunable. If it isn't present, fall
+% back to the static "Source Sans 3" package, then to "Source Sans Pro" (bundled
+% with TeX Live). See posquit0/Awesome-CV#624.
+%
+% BODY-WEIGHT KNOB: body copy (summary, bullets, dates, tags) uses the light
+% series {l}. Its wght=350 below is the one number to tune (300 = airy like
+% Kirin's, 400 = today's Regular). The four {l} FontFace lines must stay in sync.
+\IfFileExists{fonts/SourceSans3VF-Roman.otf}{%
+  \setmainfont{SourceSans3VF-Roman.otf}[
+    Path={fonts/},
+    RawFeature={+axis={wght=400}},
+    BoldFont={SourceSans3VF-Roman.otf},
     BoldFeatures={RawFeature={+axis={wght=700}}},
-    ItalicFont={Source Sans 3 Italic},
-    ItalicFeatures={RawFeature={+axis={wght=350}}},
-    BoldItalicFont={Source Sans 3 Italic},
+    ItalicFont={SourceSans3VF-Italic.otf},
+    ItalicFeatures={RawFeature={+axis={wght=400}}},
+    BoldItalicFont={SourceSans3VF-Italic.otf},
     BoldItalicFeatures={RawFeature={+axis={wght=700}}},
-    FontFace={l}{n}{Font=Source Sans 3, RawFeature={+axis={wght=300}}},
-    FontFace={l}{it}{Font=Source Sans 3 Italic, RawFeature={+axis={wght=300}}},
+    FontFace={l}{n}{Font=SourceSans3VF-Roman.otf, RawFeature={+axis={wght=350}}},
+    FontFace={l}{it}{Font=SourceSans3VF-Italic.otf, RawFeature={+axis={wght=350}}},
   ]
-  \setsansfont{Source Sans 3}[
-    RawFeature={+axis={wght=350}},
-    BoldFont={Source Sans 3},
+  \setsansfont{SourceSans3VF-Roman.otf}[
+    Path={fonts/},
+    RawFeature={+axis={wght=400}},
+    BoldFont={SourceSans3VF-Roman.otf},
     BoldFeatures={RawFeature={+axis={wght=700}}},
-    ItalicFont={Source Sans 3 Italic},
-    ItalicFeatures={RawFeature={+axis={wght=350}}},
-    BoldItalicFont={Source Sans 3 Italic},
+    ItalicFont={SourceSans3VF-Italic.otf},
+    ItalicFeatures={RawFeature={+axis={wght=400}}},
+    BoldItalicFont={SourceSans3VF-Italic.otf},
     BoldItalicFeatures={RawFeature={+axis={wght=700}}},
-    FontFace={l}{n}{Font=Source Sans 3, RawFeature={+axis={wght=300}}},
-    FontFace={l}{it}{Font=Source Sans 3 Italic, RawFeature={+axis={wght=300}}},
+    FontFace={l}{n}{Font=SourceSans3VF-Roman.otf, RawFeature={+axis={wght=350}}},
+    FontFace={l}{it}{Font=SourceSans3VF-Italic.otf, RawFeature={+axis={wght=350}}},
   ]
 }{%
-  \setmainfont{Source Sans Pro}[
-    FontFace={l}{n}{Font=*-Light},
-    FontFace={l}{it}{Font=*-LightItalic},
-  ]
-  \setsansfont{Source Sans Pro}[
-    FontFace={l}{n}{Font=*-Light},
-    FontFace={l}{it}{Font=*-LightItalic},
-  ]
+  \IfFontExistsTF{Source Sans 3}{%
+    \setmainfont{Source Sans 3}[
+      RawFeature={+axis={wght=400}},
+      BoldFont={Source Sans 3},
+      BoldFeatures={RawFeature={+axis={wght=700}}},
+      ItalicFont={Source Sans 3 Italic},
+      ItalicFeatures={RawFeature={+axis={wght=400}}},
+      BoldItalicFont={Source Sans 3 Italic},
+      BoldItalicFeatures={RawFeature={+axis={wght=700}}},
+      FontFace={l}{n}{Font=Source Sans 3, RawFeature={+axis={wght=300}}},
+      FontFace={l}{it}{Font=Source Sans 3 Italic, RawFeature={+axis={wght=300}}},
+    ]
+    \setsansfont{Source Sans 3}[
+      RawFeature={+axis={wght=400}},
+      BoldFont={Source Sans 3},
+      BoldFeatures={RawFeature={+axis={wght=700}}},
+      ItalicFont={Source Sans 3 Italic},
+      ItalicFeatures={RawFeature={+axis={wght=400}}},
+      BoldItalicFont={Source Sans 3 Italic},
+      BoldItalicFeatures={RawFeature={+axis={wght=700}}},
+      FontFace={l}{n}{Font=Source Sans 3, RawFeature={+axis={wght=300}}},
+      FontFace={l}{it}{Font=Source Sans 3 Italic, RawFeature={+axis={wght=300}}},
+    ]
+  }{%
+    \setmainfont{Source Sans Pro}[
+      FontFace={l}{n}{Font=*-Light},
+      FontFace={l}{it}{Font=*-LightItalic},
+    ]
+    \setsansfont{Source Sans Pro}[
+      FontFace={l}{n}{Font=*-Light},
+      FontFace={l}{it}{Font=*-LightItalic},
+    ]
+  }
 }
 \newfontfamily\roboto{Roboto}[
   UprightFont=*, ItalicFont=* Italic, BoldFont=* Bold,
@@ -442,6 +474,9 @@
       \entrypositionstyle{#2}\entryskillsinline{#1} & \entrydatestyle{#5} \\}
     \ifstrempty{#6}{}{\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#6}}}
   \end{tabular*}%
+  % cvitems ends with \vspace{-4mm}; compensate it so the last bullet's cell is
+  % measured at full height and the next entry can't overlap it.
+  \ifstrempty{#6}{}{\vspace{4mm}}%
 }
 
 % Define an entry of cv information
