@@ -66,22 +66,22 @@
 % posquit0/Awesome-CV#624.
 \IfFontExistsTF{Source Sans 3}{%
   \setmainfont{Source Sans 3}[
-    RawFeature={+axis={wght=400}},
+    RawFeature={+axis={wght=350}},
     BoldFont={Source Sans 3},
     BoldFeatures={RawFeature={+axis={wght=700}}},
     ItalicFont={Source Sans 3 Italic},
-    ItalicFeatures={RawFeature={+axis={wght=400}}},
+    ItalicFeatures={RawFeature={+axis={wght=350}}},
     BoldItalicFont={Source Sans 3 Italic},
     BoldItalicFeatures={RawFeature={+axis={wght=700}}},
     FontFace={l}{n}{Font=Source Sans 3, RawFeature={+axis={wght=300}}},
     FontFace={l}{it}{Font=Source Sans 3 Italic, RawFeature={+axis={wght=300}}},
   ]
   \setsansfont{Source Sans 3}[
-    RawFeature={+axis={wght=400}},
+    RawFeature={+axis={wght=350}},
     BoldFont={Source Sans 3},
     BoldFeatures={RawFeature={+axis={wght=700}}},
     ItalicFont={Source Sans 3 Italic},
-    ItalicFeatures={RawFeature={+axis={wght=400}}},
+    ItalicFeatures={RawFeature={+axis={wght=350}}},
     BoldItalicFont={Source Sans 3 Italic},
     BoldItalicFeatures={RawFeature={+axis={wght=700}}},
     FontFace={l}{n}{Font=Source Sans 3, RawFeature={+axis={wght=300}}},
