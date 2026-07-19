@@ -5,6 +5,9 @@
 \documentclass[12pt, a4paper]{awesome-cv}
 \geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=1.0cm}
 
+% For the top-right QR overlay (drawn on the page foreground, no text-flow impact).
+\usepackage{eso-pic}
+
 % Absorb page slack into legibility (line-height in the text blocks) rather than
 % inter-section gaps. Body baselineskip is set to 1em (ratio ~1.0), so this is a
 % gentle spread. Tune upward (~1.10-1.12) to fill more, but keep it to ONE page.
@@ -19,15 +22,16 @@
 \input{content/info}
 
 \begin{document}
+    % Easter egg: QR in the top-right corner (points to a static site self-hosted in a
+    % homelab microVM). Drawn on page 1's foreground via eso-pic, so it has zero impact
+    % on the text flow -- a tikz overlay in the body nudged the first section title right.
+    % Placed flush to the top-right text margin (right 1.4cm / top 0.8cm), 1.5cm wide.
+    \AddToShipoutPictureFG*{%
+      \put(\LenToUnit{\dimexpr\paperwidth-1.4cm-1.5cm\relax},%
+           \LenToUnit{\dimexpr\paperheight-0.8cm-1.5cm\relax}){%
+        \includegraphics[width=1.5cm]{content/qrcode.png}}%
+    }%
     \makecvheader[L]
-    % Easter egg: QR in the top-right corner, pointing to a static site self-hosted
-    % in a homelab microVM. Absolute overlay so it doesn't disturb the header layout.
-    % (Needs two compile passes for the position; latexmk handles that.)
-    \begin{tikzpicture}[remember picture, overlay]
-      \node[anchor=north east, inner sep=0pt]
-        at ([xshift=-1.4cm, yshift=-0.8cm]current page.north east)
-        {\includegraphics[width=1.5cm]{content/qrcode.png}};
-    \end{tikzpicture}%
     \makecvfooter{Updated \today}{}{\thepage}
     \input{content/summary}
     \input{content/experience}
