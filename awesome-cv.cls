@@ -462,11 +462,13 @@
   \setlength{\extrarowheight}{0pt}
   \renewcommand{\arraystretch}{0.90} % Tighter
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}} % maybe l r is simpler?
-    \ifempty{#3#4}
-      {\entrypositionstyle{#2}\entryskillsinline{#1} & \entrydatestyle{#5} \\}
-      {\entrytitlestyle{#3} & \entrylocationstyle{#4} \\
-      \entrypositionstyle{#2}\entryskillsinline{#1} & \entrydatestyle{#5} \\}
-    \ifstrempty{#6}{}{\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#6}}}
+    % Company/location row is optional (empty for continuation roles). The
+    % position row is ALWAYS rendered by these exact literal tokens so every
+    % entry's role line is placed identically -- keeping the conditional from
+    % wrapping the role row (which shifted continuation entries sideways).
+    \ifempty{#3#4}{}{\entrytitlestyle{#3} & \entrylocationstyle{#4} \\}%
+    \entrypositionstyle{#2}\entryskillsinline{#1} & \entrydatestyle{#5} \\
+    \ifstrempty{#6}{}{\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#6}}}%
   \end{tabular*}%
   % cvitems ends with \vspace{-4mm}; compensate it so the last bullet's cell is
   % measured at full height and the next entry can't overlap it.
@@ -481,10 +483,8 @@
   \setlength{\extrarowheight}{0pt}
   \renewcommand{\arraystretch}{0.90} % Tighter
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \ifempty{#2#3}
-      {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-      {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
-      \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+    \ifempty{#2#3}{}{\entrytitlestyle{#2} & \entrylocationstyle{#3} \\}%
+    \entrypositionstyle{#1} & \entrydatestyle{#4} \\
   \end{tabular*}%
 }
 
