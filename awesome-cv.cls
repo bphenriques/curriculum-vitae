@@ -426,19 +426,21 @@
 }{%
   \end{center}
 }
+% Inline skill pills rendered right after the position (empty -> nothing)
+\newcommand*{\entryskillsinline}[1]{\ifstrempty{#1}{}{\hspace{0.75em}\skilltaglist{#1}}}
 % Define an entry of cv information
-% Usage: \cventry{<position>}{<title>}{<location>}{<date>}{<description>}
-\newcommand*{\cventry}[5]{%
+% Usage: \cventry[<skills>]{<position>}{<title>}{<location>}{<date>}{<description>}
+\newcommand*{\cventry}[6][]{%
   \vspace{-1.0mm} % ORIGINAL: -2mm
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
-  \renewcommand{\arraystretch}{0.90} % Tighter  
+  \renewcommand{\arraystretch}{0.90} % Tighter
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}} % maybe l r is simpler?
-    \ifempty{#2#3}
-      {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-      {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
-      \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-    \ifstrempty{#5}{}{\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#5}}}
+    \ifempty{#3#4}
+      {\entrypositionstyle{#2}\entryskillsinline{#1} & \entrydatestyle{#5} \\}
+      {\entrytitlestyle{#3} & \entrylocationstyle{#4} \\
+      \entrypositionstyle{#2}\entryskillsinline{#1} & \entrydatestyle{#5} \\}
+    \ifstrempty{#6}{}{\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#6}}}
   \end{tabular*}%
 }
 
