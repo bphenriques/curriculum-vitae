@@ -61,38 +61,32 @@
 \RequirePackage{fontawesome6}       % Needed to use icons from font-awesome
 \RequirePackage{accsupp}            % Needed for accessibility support
 \defaultfontfeatures{Renderer=HarfBuzz}
-% Prefer the vendored VARIABLE font (fonts/SourceSans3VF-*.otf) so the wght axis
-% is actually honoured and the body weight is tunable. If it isn't present, fall
-% back to the static "Source Sans 3" package, then to "Source Sans Pro" (bundled
-% with TeX Live). See posquit0/Awesome-CV#624.
+% Prefer the vendored STATIC weight instances (fonts/SourceSans3-*.ttf) that were
+% sliced out of the Source Sans 3 variable font with fonttools. We must use
+% separate static files per weight because xdvipdfmx (xelatex's PDF backend)
+% collapses every use of a single variable-font file to ONE instance -- so body,
+% regular and bold sharing one VF all render at the same weight (no bold). Static
+% files sidestep that. If they're absent, fall back to the static "Source Sans 3"
+% package, then to "Source Sans Pro". See posquit0/Awesome-CV#624 and fonts/README.md.
 %
-% BODY-WEIGHT KNOB: body copy (summary, bullets, dates, tags) uses the light
-% series {l}. Its wght=350 below is the one number to tune (300 = airy like
-% Kirin's, 400 = today's Regular). The four {l} FontFace lines must stay in sync.
-\IfFileExists{fonts/SourceSans3VF-Roman.ttf}{%
-  \setmainfont{SourceSans3VF-Roman.ttf}[
+% BODY-WEIGHT KNOB: body copy is the SourceSans3-Body.ttf instance (currently
+% wght=380). To retune, re-slice it at another weight -- see fonts/make-instances.sh.
+\IfFileExists{fonts/SourceSans3-Body.ttf}{%
+  \setmainfont{SourceSans3-Body.ttf}[
     Path={fonts/},
-    RawFeature={+axis={wght=400}},
-    BoldFont={SourceSans3VF-Roman.ttf},
-    BoldFeatures={RawFeature={+axis={wght=700}}},
-    ItalicFont={SourceSans3VF-Italic.ttf},
-    ItalicFeatures={RawFeature={+axis={wght=400}}},
-    BoldItalicFont={SourceSans3VF-Italic.ttf},
-    BoldItalicFeatures={RawFeature={+axis={wght=700}}},
-    FontFace={l}{n}{Font=SourceSans3VF-Roman.ttf, RawFeature={+axis={wght=350}}},
-    FontFace={l}{it}{Font=SourceSans3VF-Italic.ttf, RawFeature={+axis={wght=350}}},
+    BoldFont={SourceSans3-Bold.ttf},
+    ItalicFont={SourceSans3-BodyItalic.ttf},
+    BoldItalicFont={SourceSans3-BoldItalic.ttf},
+    FontFace={l}{n}{Font=SourceSans3-Body.ttf},
+    FontFace={l}{it}{Font=SourceSans3-BodyItalic.ttf},
   ]
-  \setsansfont{SourceSans3VF-Roman.ttf}[
+  \setsansfont{SourceSans3-Body.ttf}[
     Path={fonts/},
-    RawFeature={+axis={wght=400}},
-    BoldFont={SourceSans3VF-Roman.ttf},
-    BoldFeatures={RawFeature={+axis={wght=700}}},
-    ItalicFont={SourceSans3VF-Italic.ttf},
-    ItalicFeatures={RawFeature={+axis={wght=400}}},
-    BoldItalicFont={SourceSans3VF-Italic.ttf},
-    BoldItalicFeatures={RawFeature={+axis={wght=700}}},
-    FontFace={l}{n}{Font=SourceSans3VF-Roman.ttf, RawFeature={+axis={wght=350}}},
-    FontFace={l}{it}{Font=SourceSans3VF-Italic.ttf, RawFeature={+axis={wght=350}}},
+    BoldFont={SourceSans3-Bold.ttf},
+    ItalicFont={SourceSans3-BodyItalic.ttf},
+    BoldItalicFont={SourceSans3-BoldItalic.ttf},
+    FontFace={l}{n}{Font=SourceSans3-Body.ttf},
+    FontFace={l}{it}{Font=SourceSans3-BodyItalic.ttf},
   ]
 }{%
   \IfFontExistsTF{Source Sans 3}{%
