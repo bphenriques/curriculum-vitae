@@ -8,7 +8,13 @@
 % Absorb page slack into legibility (line-height in the text blocks) rather than
 % inter-section gaps. Body baselineskip is set to 1em (ratio ~1.0), so this is a
 % gentle spread. Tune upward (~1.10-1.12) to fill more, but keep it to ONE page.
-\linespread{1.02}
+%\linespread{1.02}
+
+% ATS / copy-paste fix: make XeTeX record the INPUT characters as /ActualText, so
+% the PDF text layer extracts what was typed ("Engineer", "Distributed Systems")
+% regardless of glyph substitution. Without this, small-caps glyphs extract as a
+% dotless-i / long-s and fail ATS keyword matching. Keeps the small-caps look.
+\XeTeXgenerateactualtext=1
 
 \input{content/info}
 

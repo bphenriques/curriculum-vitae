@@ -452,27 +452,26 @@
 }{%
   \end{center}
 }
-% Inline skill pills rendered right after the position (empty -> nothing)
-\newcommand*{\entryskillsinline}[1]{\ifstrempty{#1}{}{\hspace{0.75em}\skilltaglist{#1}}}
+% Skill pills rendered below the entry description (empty -> nothing). The
+% \vspace{4mm} also compensates the \vspace{-4mm} that cvitems ends with, so the
+% last bullet's cell measures at full height.
+\newcommand*{\entryskillsbelow}[1]{\ifstrempty{#1}{}{\vspace{4mm}\skilltaglist{#1}}}
 % Define an entry of cv information
 % Usage: \cventry[<skills>]{<position>}{<title>}{<location>}{<date>}{<description>}
+% Pass the skill tags as the optional [<skills>] argument; they render below the
+% bullets automatically (no need to append \skilltaglist by hand).
 \newcommand*{\cventry}[6][]{%
   \vspace{-1.0mm} % ORIGINAL: -2mm
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \renewcommand{\arraystretch}{0.90} % Tighter
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}} % maybe l r is simpler?
-    % Company/location row is optional (empty for continuation roles). The
-    % position row is ALWAYS rendered by these exact literal tokens so every
-    % entry's role line is placed identically -- keeping the conditional from
-    % wrapping the role row (which shifted continuation entries sideways).
-    \ifempty{#3#4}{}{\entrytitlestyle{#3} & \entrylocationstyle{#4} \\}%
-    \entrypositionstyle{#2}\entryskillsinline{#1} & \entrydatestyle{#5} \\
-    \ifstrempty{#6}{}{\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#6}}}%
+    \ifempty{#3#4}
+      {\entrypositionstyle{#2} & \entrydatestyle{#5} \\}
+      {\entrytitlestyle{#3} & \entrylocationstyle{#4} \\
+      \entrypositionstyle{#2} & \entrydatestyle{#5} \\}
+    \ifstrempty{#6}{}{\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#6\entryskillsbelow{#1}}}}
   \end{tabular*}%
-  % cvitems ends with \vspace{-4mm}; compensate it so the last bullet's cell is
-  % measured at full height and the next entry can't overlap it.
-  \ifstrempty{#6}{}{\vspace{4mm}}%
 }
 
 % Define an entry of cv information
@@ -483,8 +482,10 @@
   \setlength{\extrarowheight}{0pt}
   \renewcommand{\arraystretch}{0.90} % Tighter
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \ifempty{#2#3}{}{\entrytitlestyle{#2} & \entrylocationstyle{#3} \\}%
-    \entrypositionstyle{#1} & \entrydatestyle{#4} \\
+    \ifempty{#2#3}
+      {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+      {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
+      \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
   \end{tabular*}%
 }
 
@@ -634,17 +635,16 @@
 }
 
 % \openSourceEntry[<skills>]{Title}{When}{Description}
+% Skill tags go in the optional [<skills>] argument and render below the items.
 \newcommand*{\openSourceEntry}[4][]{%
   \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \renewcommand{\arraystretch}{0.90} % Tighter
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \entrytitlestyle{#2}\entryskillsinline{#1} & \entrydatestyle{#3} \\
-    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#4}}
+    \entrytitlestyle{#2} & \entrydatestyle{#3} \\
+    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#4\entryskillsbelow{#1}}}
   \end{tabular*}%
-  % openSourceItems ends with \vspace{-4mm}; compensate so the last bullet isn't overlapped.
-  \ifstrempty{#4}{}{\vspace{4mm}}%
   }
   
 \newenvironment{openSourceDescription}{%
