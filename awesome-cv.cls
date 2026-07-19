@@ -69,30 +69,30 @@
 % BODY-WEIGHT KNOB: body copy (summary, bullets, dates, tags) uses the light
 % series {l}. Its wght=350 below is the one number to tune (300 = airy like
 % Kirin's, 400 = today's Regular). The four {l} FontFace lines must stay in sync.
-\IfFileExists{fonts/SourceSans3VF-Roman.otf}{%
-  \setmainfont{SourceSans3VF-Roman.otf}[
+\IfFileExists{fonts/SourceSans3VF-Roman.ttf}{%
+  \setmainfont{SourceSans3VF-Roman.ttf}[
     Path={fonts/},
     RawFeature={+axis={wght=400}},
-    BoldFont={SourceSans3VF-Roman.otf},
+    BoldFont={SourceSans3VF-Roman.ttf},
     BoldFeatures={RawFeature={+axis={wght=700}}},
-    ItalicFont={SourceSans3VF-Italic.otf},
+    ItalicFont={SourceSans3VF-Italic.ttf},
     ItalicFeatures={RawFeature={+axis={wght=400}}},
-    BoldItalicFont={SourceSans3VF-Italic.otf},
+    BoldItalicFont={SourceSans3VF-Italic.ttf},
     BoldItalicFeatures={RawFeature={+axis={wght=700}}},
-    FontFace={l}{n}{Font=SourceSans3VF-Roman.otf, RawFeature={+axis={wght=350}}},
-    FontFace={l}{it}{Font=SourceSans3VF-Italic.otf, RawFeature={+axis={wght=350}}},
+    FontFace={l}{n}{Font=SourceSans3VF-Roman.ttf, RawFeature={+axis={wght=350}}},
+    FontFace={l}{it}{Font=SourceSans3VF-Italic.ttf, RawFeature={+axis={wght=350}}},
   ]
-  \setsansfont{SourceSans3VF-Roman.otf}[
+  \setsansfont{SourceSans3VF-Roman.ttf}[
     Path={fonts/},
     RawFeature={+axis={wght=400}},
-    BoldFont={SourceSans3VF-Roman.otf},
+    BoldFont={SourceSans3VF-Roman.ttf},
     BoldFeatures={RawFeature={+axis={wght=700}}},
-    ItalicFont={SourceSans3VF-Italic.otf},
+    ItalicFont={SourceSans3VF-Italic.ttf},
     ItalicFeatures={RawFeature={+axis={wght=400}}},
-    BoldItalicFont={SourceSans3VF-Italic.otf},
+    BoldItalicFont={SourceSans3VF-Italic.ttf},
     BoldItalicFeatures={RawFeature={+axis={wght=700}}},
-    FontFace={l}{n}{Font=SourceSans3VF-Roman.otf, RawFeature={+axis={wght=350}}},
-    FontFace={l}{it}{Font=SourceSans3VF-Italic.otf, RawFeature={+axis={wght=350}}},
+    FontFace={l}{n}{Font=SourceSans3VF-Roman.ttf, RawFeature={+axis={wght=350}}},
+    FontFace={l}{it}{Font=SourceSans3VF-Italic.ttf, RawFeature={+axis={wght=350}}},
   ]
 }{%
   \IfFontExistsTF{Source Sans 3}{%
