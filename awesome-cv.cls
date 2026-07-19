@@ -633,16 +633,18 @@
     \footnotesize{\foreach \n in {#1}{\skilltag{\n}}}
 }
 
-% \openSourceEntry{Title}{When}{Description}
-\newcommand*{\openSourceEntry}[3]{%
+% \openSourceEntry[<skills>]{Title}{When}{Description}
+\newcommand*{\openSourceEntry}[4][]{%
   \vspace{-2.0mm}
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \renewcommand{\arraystretch}{0.90} % Tighter
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \entrytitlestyle{#1} & \entrydatestyle{#2} \\
-    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#3}}
+    \entrytitlestyle{#2}\entryskillsinline{#1} & \entrydatestyle{#3} \\
+    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#4}}
   \end{tabular*}%
+  % openSourceItems ends with \vspace{-4mm}; compensate so the last bullet isn't overlapped.
+  \ifstrempty{#4}{}{\vspace{4mm}}%
   }
   
 \newenvironment{openSourceDescription}{%
