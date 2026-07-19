@@ -22,14 +22,15 @@
 \input{content/info}
 
 \begin{document}
-    % Easter egg: QR in the top-right corner (points to a static site self-hosted in a
-    % homelab microVM). Drawn on page 1's foreground via eso-pic, so it has zero impact
-    % on the text flow -- a tikz overlay in the body nudged the first section title right.
-    % Placed flush to the top-right text margin (right 1.4cm / top 0.8cm), 1.5cm wide.
+    % Easter egg: QR in the top-right corner, both scannable and clickable, pointing to
+    % a static site self-hosted in a homelab microVM. Drawn on page 1's foreground via
+    % eso-pic, so it has zero impact on the text flow -- a tikz overlay in the body
+    % nudged the first section title right. Flush to the top-right text margin
+    % (right 1.4cm / top 0.8cm), 1.5cm wide. hidelinks (from the class) => no link box.
     \AddToShipoutPictureFG*{%
       \put(\LenToUnit{\dimexpr\paperwidth-1.4cm-1.5cm\relax},%
            \LenToUnit{\dimexpr\paperheight-0.8cm-1.5cm\relax}){%
-        \includegraphics[width=1.5cm]{content/qrcode.png}}%
+        \href{https://cv-vm.chameleon-goby.ts.net/}{\includegraphics[width=1.5cm]{content/qrcode.png}}}%
     }%
     \makecvheader[L]
     \makecvfooter{Updated \today}{}{\thepage}
