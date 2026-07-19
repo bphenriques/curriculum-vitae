@@ -20,6 +20,14 @@
 
 \begin{document}
     \makecvheader[L]
+    % Easter egg: QR in the top-right corner, pointing to a static site self-hosted
+    % in a homelab microVM. Absolute overlay so it doesn't disturb the header layout.
+    % (Needs two compile passes for the position; latexmk handles that.)
+    \begin{tikzpicture}[remember picture, overlay]
+      \node[anchor=north east, inner sep=0pt]
+        at ([xshift=-1.4cm, yshift=-0.8cm]current page.north east)
+        {\includegraphics[width=1.5cm]{content/qrcode.png}};
+    \end{tikzpicture}%
     \makecvfooter{Updated \today}{}{\thepage}
     \input{content/summary}
     \input{content/experience}

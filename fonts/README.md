@@ -27,6 +27,13 @@ Two backend limitations forced this:
 Slicing a **separate static file per weight** sidesteps both: each embeds cleanly,
 and bold is a genuinely different file, so `\textbf` works.
 
+## Small-caps / ATS text extraction
+
+Small-caps headings (roles, the tagline, the degree line) would otherwise extract
+from the PDF as garbled glyphs (a dotless-i / long-s) and fail ATS keyword matching.
+That's fixed in `cv.tex` with `\XeTeXgenerateactualtext=1`, which records the typed
+characters — so it needs no glyph-level changes to these fonts.
+
 ## Retuning the body weight
 
 Edit the weight and re-slice (needs `fonttools` — `pip install fonttools`):
