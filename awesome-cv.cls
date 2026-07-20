@@ -364,7 +364,7 @@
 
 % Others
 \newcommand{\acvSectionTopSkip}{1.5mm} % ORIGINAL: 3mm
-\newcommand{\acvSectionContentTopSkip}{1.25mm} % ORIGINAL: 2.5mm
+\newcommand{\acvSectionContentTopSkip}{1.5mm} % ORIGINAL: 2.5mm
 
 
 %-------------------------------------------------------------------------------
@@ -460,16 +460,20 @@
 % Usage: \cventry[<skills>]{<position>}{<title>}{<location>}{<date>}{<description>}
 % Pass the skill tags as the optional [<skills>] argument; they render below the
 % bullets automatically (no need to append \skilltaglist by hand).
+% If <position> is empty, renders a single title+date row in \entrytitlestyle
+% (bold, no position/location) -- this is what \openSourceEntry delegates to.
 \newcommand*{\cventry}[6][]{%
   \vspace{-1.0mm} % ORIGINAL: -2mm
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \renewcommand{\arraystretch}{0.90} % Tighter
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}} % maybe l r is simpler?
-    \ifempty{#3#4}
-      {\entrypositionstyle{#2} & \entrydatestyle{#5} \\}
-      {\entrytitlestyle{#3} & \entrylocationstyle{#4} \\
-      \entrypositionstyle{#2} & \entrydatestyle{#5} \\}
+    \ifempty{#2}
+      {\entrytitlestyle{#3} & \entrydatestyle{#5} \\}
+      {\ifempty{#3#4}
+        {\entrypositionstyle{#2} & \entrydatestyle{#5} \\}
+        {\entrytitlestyle{#3} & \entrylocationstyle{#4} \\
+        \entrypositionstyle{#2} & \entrydatestyle{#5} \\}}
     \ifstrempty{#6}{}{\multicolumn{2}{L{\textwidth}}{\descriptionstyle{#6\entryskillsbelow{#1}}}}
   \end{tabular*}%
 }
@@ -636,16 +640,11 @@
 
 % \openSourceEntry[<skills>]{Title}{When}{Description}
 % Skill tags go in the optional [<skills>] argument and render below the items.
+% Thin wrapper over \cventry's title-only row (empty position/location), so
+% entry spacing/typography has a single source of truth.
 \newcommand*{\openSourceEntry}[4][]{%
-  \vspace{-2.0mm}
-  \setlength\tabcolsep{0pt}
-  \setlength{\extrarowheight}{0pt}
-  \renewcommand{\arraystretch}{0.90} % Tighter
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
-    \entrytitlestyle{#2} & \entrydatestyle{#3} \\
-    \multicolumn{2}{L{\textwidth}}{\descriptionstyle{#4\entryskillsbelow{#1}}}
-  \end{tabular*}%
-  }
+  \cventry[#1]{}{#2}{}{#3}{#4}%
+}
   
 \newenvironment{openSourceDescription}{%
   \vspace{-4.0mm}
