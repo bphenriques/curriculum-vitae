@@ -1,1 +1,16 @@
 .claude
+
+# direnv / nix
+.direnv/
+.envrc.local
+
+# LaTeX build artifacts
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.xdv
+*.synctex.gz
+cv.pdf
+coverletter.pdf

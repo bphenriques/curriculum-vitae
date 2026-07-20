@@ -36,14 +36,21 @@ characters — so it needs no glyph-level changes to these fonts.
 
 ## Retuning the body weight
 
-Edit the weight and re-slice (needs `fonttools` — `pip install fonttools`):
+Inside the Nix dev shell (`nix develop` / direnv), re-slice at a different weight:
 
 ```sh
-BODY_WGHT=370 sh fonts/make-instances.sh   # 350 = airy, 400 = Regular
+BODY_WGHT=370 regen-fonts   # 350 = airy, 400 = Regular
 ```
 
-Then rebuild. `make-instances.sh` fetches the variable font automatically if it
-isn't already unpacked (pass `VF_DIR=/path/to/VF` to reuse a local copy).
+Or, without Nix, run the script directly (needs `fonttools` — `pip install fonttools`):
+
+```sh
+BODY_WGHT=370 sh fonts/make-instances.sh
+```
+
+Then rebuild. The script fetches the variable font automatically if it isn't
+already unpacked (pass `VF_DIR=/path/to/VF` to reuse a local copy), and writes to
+`fonts/` by default (override with `OUT=/some/dir`).
 
 ## License
 

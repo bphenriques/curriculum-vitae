@@ -30,6 +30,9 @@ jobs:
       - name: Compile LaTeX
         run: latexmk -xelatex -file-line-error -halt-on-error -interaction=nonstopmode cv.tex
 
+      - name: Name the release asset
+        run: cp cv.pdf bruno-henriques-cv.pdf  # matches the README download badge
+
       - name: Obtain the next version
         id: fetch_tag
         run: echo "tag=$(./ci/next-semver.sh --mode patch)" >> "$GITHUB_OUTPUT"
@@ -39,6 +42,6 @@ jobs:
         with:
           tag_name: ${{ steps.fetch_tag.outputs.tag }}
           name: Release ${{ steps.fetch_tag.outputs.tag }}
-          files: cv.pdf
+          files: bruno-henriques-cv.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

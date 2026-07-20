@@ -19,7 +19,7 @@ set -eu
 
 BODY_WGHT="${BODY_WGHT:-380}"
 BOLD_WGHT="${BOLD_WGHT:-700}"
-OUT="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
+OUT="${OUT:-$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)}"
 PYTHON="${PYTHON:-python3}"
 VF_DIR="${VF_DIR:-}"
 

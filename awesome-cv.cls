@@ -446,8 +446,11 @@
 }
 
 % Define an environment for cventry
+% The extra -2mm centralizes the section-header-to-first-entry pull that used
+% to be duplicated as a stray \vspace{-2mm} in individual content files.
 \newenvironment{cventries}{%
   \vspace{\acvSectionContentTopSkip}
+  \vspace{-2mm}
   \begin{center}
 }{%
   \end{center}
@@ -481,7 +484,7 @@
 % Define an entry of cv information
 % Usage: \cventry{<position>}{<title>}{<location>}{<date>}
 \newcommand*{\cventryShort}[4]{%
-  \vspace{-2.0mm}
+  \vspace{-1.0mm} % ORIGINAL: -2mm (matches \cventry)
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \renewcommand{\arraystretch}{0.90} % Tighter

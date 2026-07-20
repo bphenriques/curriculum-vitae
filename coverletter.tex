@@ -1,8 +1,12 @@
 %!TEX TS-program = xelatex
 %!TEX encoding = UTF-8 Unicode
 
-\documentclass[11pt, a4paper]{awesome-cv}
-\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
+\documentclass[12pt, a4paper]{awesome-cv}
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.1cm, footskip=.3cm}  % match cv.tex
+
+% Same ATS / copy-paste fix as cv.tex: record typed characters as /ActualText so
+% small-caps headings extract as real text.
+\XeTeXgenerateactualtext=1
 
 %-------------------------------------------------------------------------------
 %	LETTER INFORMATION
@@ -34,7 +38,7 @@
 \lettersection{About Me}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque sit amet lectus facilisis sed luctus nisl iaculis.
 
-\lettersection{Why Google?}
+\lettersection{Why This Company?}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ullamcorper neque sit amet lectus facilisis sed luctus nisl iaculis.
 
 \lettersection{Why Me?}
