@@ -45,7 +45,7 @@ BODY_WGHT=370 regen-fonts   # 350 = airy, 400 = Regular
 Or, without Nix, run the script directly (needs `fonttools` — `pip install fonttools`):
 
 ```sh
-BODY_WGHT=370 sh fonts/make-instances.sh
+BODY_WGHT=370 sh fonts/slice-fonts.sh
 ```
 
 Then rebuild. The script fetches the variable font automatically if it isn't

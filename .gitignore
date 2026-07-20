@@ -1,8 +1,14 @@
 .claude
+.idea/
 
 # direnv / nix
 .direnv/
 .envrc.local
+result
+result-*
+
+# Generated at build time (from nix/default.nix), not committed
+content/qrcode.png
 
 # LaTeX build artifacts
 *.aux

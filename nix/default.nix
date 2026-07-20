@@ -1,32 +1,20 @@
-# Shared build environment + commands for the CV, consumed by both ./shell.nix
-# (dev shell) and ../flake.nix (apps). Keeping it here means the toolchain and the
-# helper commands are defined once.
 { pkgs }:
 let
-  # LaTeX toolchain. Generous-but-curated so `xelatex` has every package the class
-  # pulls in (tcolorbox+skins, tikz/tikzfill, fontawesome6, eso-pic, enumitem, ...).
-  # If a future edit needs a package that's missing, either add it by name here or
-  # swap the whole set for `pkgs.texliveFull` (heavier, but guaranteed complete).
-  tex = pkgs.texlive.combine {
-    inherit (pkgs.texlive)
-      scheme-medium
-      collection-xetex # xetex, fontspec, unicode-math
-      collection-latexextra # tcolorbox, enumitem, eso-pic, environ, ...
-      collection-pictures # pgf/tikz (tcolorbox dependency)
-      collection-fontsrecommended
-      latexmk
-      fontawesome6
-      tikzfill # tcolorbox 'skins' dependency
-      sourcesanspro # "Source Sans Pro" fallback face
-      ;
-  };
+  inherit (pkgs) lib;
 
-  # Python with fonttools, for slicing the variable font into static weights.
+  # TeX Live medium + the extras awesome-cv.cls pulls in.
+  tex = pkgs.texliveMedium.withPackages (ps: [
+    ps.collection-latexextra # tcolorbox, enumitem, eso-pic, environ, ...
+    ps.collection-pictures # pgf/tikz (tcolorbox dependency)
+    ps.fontawesome6
+    ps.tikzfill # tcolorbox 'skins' dependency
+    ps.sourcesanspro # "Source Sans Pro" fallback face
+  ]);
+
+  # fonttools, for re-slicing the variable font (regen-fonts).
   pythonEnv = pkgs.python3.withPackages (ps: [ ps.fonttools ]);
 
-  # Make the header font (Roboto) discoverable by fontconfig/XeTeX. The body fonts
-  # are vendored under fonts/ and loaded by path, so they don't need to be here;
-  # source-sans is included only for the class's fallback branch.
+  # Roboto (header font) discoverable via fontconfig; source-sans is the class's fallback.
   fontsConf = pkgs.makeFontsConf {
     fontDirectories = [
       pkgs.roboto
@@ -34,76 +22,51 @@ let
     ];
   };
 
-  # Easter-egg QR target (a static site self-hosted in a homelab microVM).
   qrUrl = "https://cv-vm.chameleon-goby.ts.net/";
+  genQr = ''qrencode -o content/qrcode.png -s 12 -m 2 -l M --foreground=000000FF --background=FFFFFF00 "${qrUrl}"'';
 
-  # Hermetic PDF build (`nix build .#cv`). Unlike the `build-*` commands below --
-  # which run latexmk in the working tree for fast local iteration -- this builds
-  # in the sandbox from a clean source snapshot, so it's what CI/releases consume.
-  mkPdf =
-    { name, texFile }:
+  latexmkCmd = "latexmk -xelatex -file-line-error -halt-on-error -interaction=nonstopmode";
+
+  # Hermetic build (`nix build .#cv`): clean sandbox snapshot, what CI/releases consume.
+  mkPdf = { name, texFile, qr ? false, }:
     pkgs.stdenvNoCC.mkDerivation {
       inherit name;
-      src = pkgs.lib.cleanSource ../.;
-      nativeBuildInputs = [ tex ];
+      src = lib.cleanSource ../.;
+      nativeBuildInputs = [ tex ] ++ lib.optional qr pkgs.qrencode;
       FONTCONFIG_FILE = fontsConf;
       buildPhase = ''
-        runHook preBuild
-        export HOME="$TMPDIR"   # latexmk/xelatex need a writable HOME for caches
-        latexmk -xelatex -file-line-error -halt-on-error -interaction=nonstopmode ${texFile}
-        runHook postBuild
+        export HOME="$TMPDIR" # latexmk/xelatex need a writable HOME
+        ${lib.optionalString qr genQr}
+        ${latexmkCmd} ${texFile}
       '';
-      installPhase = ''
-        runHook preInstall
-        install -Dm644 ${pkgs.lib.removeSuffix ".tex" texFile}.pdf "$out/${name}.pdf"
-        runHook postInstall
+      installPhase = ''install -Dm644 ${lib.removeSuffix ".tex" texFile}.pdf "$out/${name}.pdf"'';
+    };
+
+  # Fast local build: latexmk in the working tree (PDF lands next to the .tex).
+  mkBuild = { name, texFile, qr ? false, }:
+    pkgs.writeShellApplication {
+      inherit name;
+      runtimeInputs = [ tex ] ++ lib.optional qr pkgs.qrencode;
+      text = ''
+        export FONTCONFIG_FILE=${fontsConf}
+        test -f ${texFile} || { echo "Run from the repo root (${texFile} not found)." >&2; exit 1; }
+        ${lib.optionalString qr genQr}
+        exec ${latexmkCmd} ${texFile}
       '';
     };
 
-  cv = mkPdf {
-    name = "bruno-henriques-cv";
+  build-cv = mkBuild {
+    name = "build-cv";
     texFile = "cv.tex";
+    qr = true;
   };
-  coverletter = mkPdf {
-    name = "bruno-henriques-coverletter";
+
+  build-coverletter = mkBuild {
+    name = "build-coverletter";
     texFile = "coverletter.tex";
   };
 
-  build-cv = pkgs.writeShellApplication {
-    name = "build-cv";
-    runtimeInputs = [ tex ];
-    text = ''
-      export FONTCONFIG_FILE=${fontsConf}
-      test -f cv.tex || { echo "Run from the repo root (cv.tex not found)." >&2; exit 1; }
-      exec latexmk -xelatex -file-line-error -halt-on-error -interaction=nonstopmode cv.tex
-    '';
-  };
-
-  build-coverletter = pkgs.writeShellApplication {
-    name = "build-coverletter";
-    runtimeInputs = [ tex ];
-    text = ''
-      export FONTCONFIG_FILE=${fontsConf}
-      test -f coverletter.tex || { echo "Run from the repo root (coverletter.tex not found)." >&2; exit 1; }
-      exec latexmk -xelatex -file-line-error -halt-on-error -interaction=nonstopmode coverletter.tex
-    '';
-  };
-
-  # Regenerate the QR image. Pass a URL to override the default easter-egg target.
-  regen-qrcode = pkgs.writeShellApplication {
-    name = "regen-qrcode";
-    runtimeInputs = [ pkgs.qrencode ];
-    text = ''
-      url="''${1:-${qrUrl}}"
-      test -d content || { echo "Run from the repo root (content/ not found)." >&2; exit 1; }
-      qrencode -o content/qrcode.png -s 12 -m 2 -l M \
-        --foreground=000000FF --background=FFFFFF00 "$url"
-      echo "Wrote content/qrcode.png -> $url"
-    '';
-  };
-
-  # Re-slice fonts/SourceSans3-*.ttf from the variable font. Honors the script's
-  # env knobs, e.g. `regen-fonts` or `BODY_WGHT=370 regen-fonts`. Writes into $PWD/fonts.
+  # Re-slice fonts/SourceSans3-*.ttf; honors BODY_WGHT/BOLD_WGHT (see fonts/README.md).
   regen-fonts = pkgs.writeShellApplication {
     name = "regen-fonts";
     runtimeInputs = [
@@ -111,25 +74,42 @@ let
       pkgs.curl
       pkgs.unzip
       pkgs.coreutils
-      pkgs.bash
     ];
     text = ''
       test -d fonts || { echo "Run from the repo root (fonts/ not found)." >&2; exit 1; }
       export OUT="$PWD/fonts"
-      exec bash ${../fonts/make-instances.sh} "$@"
+      exec ${pkgs.bash}/bin/bash ${../fonts/slice-fonts.sh} "$@"
     '';
   };
 in
 {
-  inherit
-    tex
-    pythonEnv
-    fontsConf
-    cv
-    coverletter
-    build-cv
-    build-coverletter
-    regen-qrcode
-    regen-fonts
-    ;
+  cv = mkPdf {
+    name = "bruno-henriques-cv";
+    texFile = "cv.tex";
+    qr = true;
+  };
+
+  coverletter = mkPdf {
+    name = "bruno-henriques-coverletter";
+    texFile = "coverletter.tex";
+  };
+
+  devShell = pkgs.mkShellNoCC {
+    name = "curriculum-vitae";
+    meta.description = "Dev shell to build the CV (xelatex) and re-slice fonts";
+    packages = [
+      tex
+      pythonEnv
+      build-cv
+      build-coverletter
+      regen-fonts
+    ];
+    FONTCONFIG_FILE = fontsConf; # so bare latexmk/xelatex finds Roboto for manual runs
+    shellHook = ''
+      echo "curriculum-vitae — commands:"
+      echo "  build-cv            build cv.pdf"
+      echo "  build-coverletter   build coverletter.pdf"
+      echo "  regen-fonts         re-slice fonts/SourceSans3-*.ttf (e.g. BODY_WGHT=370 regen-fonts)"
+    '';
+  };
 }
