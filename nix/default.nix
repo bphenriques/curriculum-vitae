@@ -22,7 +22,7 @@ let
     ];
   };
 
-  qrUrl = "https://cv-vm.chameleon-goby.ts.net/";
+  qrUrl = "https://bphenriques.com";
   genQr = ''qrencode -o content/qrcode.png -s 12 -m 2 -l M --foreground=000000FF --background=FFFFFF00 "${qrUrl}"'';
 
   latexmkCmd = "latexmk -xelatex -file-line-error -halt-on-error -interaction=nonstopmode";
