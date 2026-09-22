@@ -466,10 +466,10 @@
 % If <position> is empty, renders a single title+date row in \entrytitlestyle
 % (bold, no position/location) -- this is what \openSourceEntry delegates to.
 \newcommand*{\cventry}[6][]{%
-  \vspace{-1.0mm} % ORIGINAL: -2mm
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \renewcommand{\arraystretch}{0.90} % Tighter
+  \vspace{-1.0mm} % ORIGINAL: -2mm
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}} % maybe l r is simpler?
     \ifempty{#2}
       {\entrytitlestyle{#3} & \entrydatestyle{#5} \\}
@@ -484,10 +484,10 @@
 % Define an entry of cv information
 % Usage: \cventry{<position>}{<title>}{<location>}{<date>}
 \newcommand*{\cventryShort}[4]{%
-  \vspace{-1.0mm} % ORIGINAL: -2mm (matches \cventry)
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \renewcommand{\arraystretch}{0.90} % Tighter
+  \vspace{-1.0mm} % ORIGINAL: -2mm (matches \cventry)
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{\textwidth - 4.5cm} R{4.5cm}}
     \ifempty{#2#3}
       {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
@@ -524,12 +524,12 @@
 
 % Define an environment for cvhonor
 \newenvironment{cvhonors}{%
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \renewcommand{\arraystretch}{0.90} % Tighter
   \vspace{\acvSectionContentTopSkip}
   \vspace{-2mm}
   \begin{center}
-    \setlength\tabcolsep{0pt}
-    \setlength{\extrarowheight}{0pt}
-    \renewcommand{\arraystretch}{0.90} % Tighter
     \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} C{1.5cm} L{\textwidth - 4.0cm} R{2.5cm}}
 }{%
     \end{tabular*}
@@ -543,12 +543,12 @@
 
 % Define an environment for cvskill
 \newenvironment{cvskills}{%
+  \setlength\tabcolsep{1ex}
+  \setlength{\extrarowheight}{0pt}
+  \renewcommand{\arraystretch}{0.85} % Tighter
   \vspace{\acvSectionContentTopSkip}
   \vspace{-2.0mm}
   \begin{center}
-    \setlength\tabcolsep{1ex}
-    \setlength{\extrarowheight}{0pt}
-    \renewcommand{\arraystretch}{0.85} % Tighter
     \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} r L{\textwidth * \real{0.9}}}
 }{%
     \end{tabular*}
