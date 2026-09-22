@@ -28,11 +28,11 @@ jobs:
 
       - name: Compute date tag
         id: date
-        run: echo "tag=$(date -u +'%Y.%m.%d')" >> "$GITHUB_OUTPUT"
+        run: echo "tag=$(date -u +'%Y.%m.%d-%H%M')" >> "$GITHUB_OUTPUT"
 
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.date.outputs.tag }}
-          files: result/bruno-henriques-software-engineer-cv.pdf
+          files: result/bruno-henriques-senior-software-engineer-cv.pdf
           make_latest: true
