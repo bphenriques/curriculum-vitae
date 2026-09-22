@@ -268,15 +268,15 @@
 
 % Define a collection of header information
 \edef\socialLinksList{}
-\newcommand{\socialLinksAdd}[1]{
+\newcommand{\socialLinksAdd}[1]{%
     \ifnonprint{\ignorespaces\socialLinksList}{%
         \protected@edef\socialLinksList{#1}%
     }{%
         \protected@edef\socialLinksList{\socialLinksList{} \acvHeaderSocialSep #1}%
     }%
 }%
-\newcommand{\headerSocial}[3]{
-    \socialLinksAdd{\href{#2}{#1\acvHeaderIconSep#3}}
+\newcommand{\headerSocial}[3]{%
+    \socialLinksAdd{\href{#2}{#1\acvHeaderIconSep#3}}%
 }
 
 %\newcommand{\socialbox}[1]{\mbox{#1}}
@@ -382,7 +382,7 @@
 \newcommand*{\ifempty}[3]{\ifthenelse{\isempty{#1}}{#2}{#3}}
 
 % Use to execute conditional statements by checking non-printing string
-\newcommand*{\ifnonprint}[3]{
+\newcommand*{\ifnonprint}[3]{%
 \setbox0=\hbox{#1\unskip}\ifdim\wd0=0pt
   #2
 \else
@@ -637,7 +637,7 @@
   \tikz[baseline]\node[anchor=base,draw=tagBorderColor!70,rounded corners=0.5ex,inner xsep=0.75ex,inner ysep =0.55ex,text height=1.25ex,text depth=.10ex]{\tagstyle{#1}};
 }
 
-\newcommand{\skilltaglist}[1]{
+\newcommand{\skilltaglist}[1]{%
     \footnotesize{\foreach \n in {#1}{\skilltag{\n}}}
 }
 
@@ -669,7 +669,7 @@
   \vspace{-4.0mm}
 }
 
-\newcommand{\subItem}[1]{
+\newcommand{\subItem}[1]{%
     {\setlength\itemindent{10pt} \item[\bullet]#1}
 }
 

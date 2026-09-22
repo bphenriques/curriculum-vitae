@@ -84,7 +84,7 @@ let
 in
 {
   cv = mkPdf {
-    name = "bruno-henriques-cv";
+    name = "bruno-henriques-software-engineer-cv";
     texFile = "cv.tex";
     qr = true;
   };

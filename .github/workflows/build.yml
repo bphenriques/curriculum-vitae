@@ -34,5 +34,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.date.outputs.tag }}
-          files: result/bruno-henriques-cv.pdf
+          files: result/bruno-henriques-software-engineer-cv.pdf
           make_latest: true

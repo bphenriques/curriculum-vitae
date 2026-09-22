@@ -21,6 +21,16 @@
 
 \input{content/info}
 
+% awesome-cv.cls leaves these blank; ATS/recruiter tooling and OS search read
+% them directly, otherwise falling back to the filename.
+\hypersetup{
+  pdftitle={Bruno Henriques - Software Engineer},
+  pdfauthor={Bruno Henriques},
+  pdfsubject={Curriculum Vitae},
+  pdfkeywords={Software Engineer, Technical Lead, Distributed Systems, API Platform, Scala, Kotlin, Java, TypeScript, GraphQL, AWS, Google Cloud, Kubernetes, Kafka, PostgreSQL, DynamoDB},
+  pdflang={en-GB},
+}
+
 \begin{document}
     % Easter egg: QR in the top-right corner, both scannable and clickable, pointing to
     % a static site self-hosted in a homelab microVM. Drawn on page 1's foreground via
